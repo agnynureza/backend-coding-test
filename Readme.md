@@ -103,7 +103,7 @@ All APIs accessed from `localhost:8010`, all data is send and receives as JSON, 
 
 4. Because heroku doesnt know how to run the app, create file Procfile
 5. Insert `web: node index.js`
-6. $ heroku git:remote -a <replace with app name>
+6. $ heroku git:remote -a {replace with app name}
 6. $ git add .
 7. $ git commit -m "deploy to heroku"
 8. $ git push heroku master 
