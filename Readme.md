@@ -31,7 +31,7 @@ Please deliver documentation of the server that clearly explains the goals of th
 1. A pull request against `master` of your fork with a clear description of the change and purpose and merge it
 3. **[BONUS]** Create an easy way to deploy and view the documentation in a web format and include instructions to do so
 
-### Application Overview
+#### Application Overview
 This project is build Rest Apis for creating and retrieving Rides data.  We will build with [Node.js], [SQLite] and [Express.js].  Then, unit test using [Mocha] & [Chai] and code coverage with [Istanbul].
 
 We define routes for handling create and read operations:
@@ -46,9 +46,10 @@ We define routes for handling create and read operations:
 All APIs accessed from `localhost:8010`, all data is send and receives as JSON, using postman, we're gonna test all the Apis above.
 
  1. Create new Rider using `POST /riders` Api
+
     Request Body :
 
-    ```json
+    ```
     {
         "start_lat": -90 to 90 <integer required>,
         "start_long": -180 to 180 <integer required>,
@@ -59,18 +60,32 @@ All APIs accessed from `localhost:8010`, all data is send and receives as JSON, 
         "driver_vehicle": <string required>
     }
     ```
-    Success create Ride with status code 200
+    Status code : 200
+    
     ![post](images/post.png)
     
-    Bad Request with status code 400
+    Status code : 400
+    
     ![badrequest](images/badRequest.png)
 
 2. Retrieve all rides using `GET /rides` Api 
-    Succes Get all Rides with status code 200
+
+    Status code : 200
+    
     ![getAll](images/getAll.png)
 
 3. Retrieve a single Ride by id using `GET /rides/:id` Api
+
+    Status code : 200
+    
     ![getId](images/getId.png)
+
+
+4. All the Apis will get this response if server error 
+    
+    Status Code : 500
+
+    ![err](images/serverError.png)
 
 
 ### Implement Tooling
