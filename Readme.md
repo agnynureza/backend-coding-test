@@ -31,6 +31,48 @@ Please deliver documentation of the server that clearly explains the goals of th
 1. A pull request against `master` of your fork with a clear description of the change and purpose and merge it
 3. **[BONUS]** Create an easy way to deploy and view the documentation in a web format and include instructions to do so
 
+### Application Overview
+This project is build Rest Apis for creating and retrieving Rides data.  We will build with [Node.js], [SQLite] and [Express.js].  Then, unit test using [Mocha] & [Chai] and code coverage with [Istanbul].
+
+We define routes for handling create and read operations:
+
+| Method        | Route                 | Action                                                |
+|---------------|-----------------------|-------------------------------------------------------|
+| POST          | /rides                | Add new Ride                                          |
+| GET           | /rides                | Get all Rides                                         |
+| GET           | /rides/:id            | Get Ride with spesific id                             |
+
+#### Test the APIs
+All APIs accessed from `localhost:8010`, all data is send and receives as JSON, using postman, we're gonna test all the Apis above.
+
+ 1. Create new Rider using `POST /riders` Api
+    Request Body :
+
+    ```json
+    {
+        "start_lat": -90 to 90 <integer required>,
+        "start_long": -180 to 180 <integer required>,
+        "end_lat": -90 to 90 <integer required>,
+        "end_long": -180 to 180 <integer required>,
+        "rider_name": <string required>,
+        "driver_name": <string required>,
+        "driver_vehicle": <string required>
+    }
+    ```
+    Success create Ride with status code 200
+    ![post](images/post.png)
+    
+    Bad Request with status code 400
+    ![badrequest](images/badRequest.png)
+
+2. Retrieve all rides using `GET /rides` Api 
+    Succes Get all Rides with status code 200
+    ![getAll](images/getAll.png)
+
+3. Retrieve a single Ride by id using `GET /rides/:id` Api
+    ![getId](images/getId.png)
+
+
 ### Implement Tooling
 
 Please implement the following tooling:
@@ -100,3 +142,13 @@ Please implement load testing to ensure your service can handle a high amount of
     1. Create a PR against `master` of your fork including artillery
     2. Ensure that load testing is able to be run using `npm test:load`. You can consider using a tool like `forever` to spin up a daemon and kill it after the load test has completed.
     3. Test all endpoints under at least `100 rps` for `30s` and ensure that `p99` is under `50ms`
+
+
+
+[Node.js]: <http://nodejs.org>
+[Mocha]: <https://mochajs.org/>
+[Chai]: <https://www.chaijs.com/>
+[Express.js]: <https://expressjs.com>
+[Istanbul]: <https://istanbul.js.org/>
+[SQlite]: <https://www.sqlite.org/index.html>
+
