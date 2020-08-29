@@ -87,6 +87,33 @@ All APIs accessed from `localhost:8010`, all data is send and receives as JSON, 
 
     ![err](images/serverError.png)
 
+#### Deploy to Heroku
+1. Create an Account at [Heroku]
+2. If already login, click top right corner then create the app
+
+![new](images/newApps.png)
+
+3. In Dashboard you can found `download and install heroku cli`
+
+![download](images/installHeroku.png)
+
+4. after installation heroku cli, you can login to heroku cli 
+
+![login](images/login.png)
+
+4. Because heroku doesnt know how to run the app, create file Procfile
+5. Insert `web: node index.js`
+6. $ heroku git:remote -a <replace with app name>
+6. $ git add .
+7. $ git commit -m "deploy to heroku"
+8. $ git push heroku master 
+9. What if you want push the code to heroku with code in branch `development`
+10. $ git push heroku development:master 
+11. Click Open App at Dashboard
+
+![start](images/start.png)
+
+
 
 ### Implement Tooling
 
@@ -166,4 +193,4 @@ Please implement load testing to ensure your service can handle a high amount of
 [Express.js]: <https://expressjs.com>
 [Istanbul]: <https://istanbul.js.org/>
 [SQlite]: <https://www.sqlite.org/index.html>
-
+[Heroku]: <https://www.heroku.com/#>
