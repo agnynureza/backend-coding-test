@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const jsonParser = bodyParser.json();
 
-module.exports = (db) => {
+module.exports = (db, logger) => {
   app.get('/health', (req, res) => res.send('Healthy'));
 
   app.post('/rides', jsonParser, (req, res) => {
@@ -17,7 +17,8 @@ module.exports = (db) => {
     const driverVehicle = req.body.driver_vehicle;
 
     if (startLatitude < -90 || startLatitude > 90 || startLongitude < -180 || startLongitude > 180) {
-      return res.send({
+	  logger.error('VALIDATION_ERROR');
+		return res.send({
 						error_code: 'VALIDATION_ERROR',
 						message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
 				});

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "eslint . --ext .js",
-    "test": "nyc mocha tests && exit 1",
+    "test": "nyc mocha tests",
     "start": "node index.js"
   },
   "pre-push": [
@@ -25,15 +25,19 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
-    "sqlite3": "^4.0.6"
+    "sqlite3": "^4.0.6",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "mocha": "^6.1.4",
     "nyc": "^15.1.0",
     "pre-push": "^0.1.1",
-    "supertest": "^4.0.2"
+    "source-map-support": "^0.5.19",
+    "supertest": "^4.0.2",
+    "ts-node": "^9.0.0"
   }
 }
