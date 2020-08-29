@@ -10,9 +10,13 @@
     "node": "10.19.0"
   },
   "scripts": {
-    "test": "mocha tests",
+    "lint": "eslint . --ext .js",
+    "test": "nyc mocha tests && exit 1",
     "start": "node index.js"
   },
+  "pre-push": [
+    "test"
+  ],
   "keywords": [
     "Xendit"
   ],
@@ -28,6 +32,8 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "mocha": "^6.1.4",
+    "nyc": "^15.1.0",
+    "pre-push": "^0.1.1",
     "supertest": "^4.0.2"
   }
 }
