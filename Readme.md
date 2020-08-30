@@ -132,6 +132,10 @@ All APIs accessed from `localhost:8010`, all data is send and receives as JSON, 
 ![start](images/start.png)
 
 
+#### Coverage
+code coverage with total thresholds 80% 
+
+![coverage](images/coverage.png)
 
 ### Implement Tooling
 
