@@ -5,7 +5,7 @@ const helper = require('../helper/helper');
 const model = require('./model');
 
 const app = express();
-const jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json({ limit: '1kb' });
 const validation = require('../helper/validation');
 
 module.exports = (db, logger) => {
