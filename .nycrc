@@ -2,7 +2,8 @@
     "extends": "@istanbuljs/nyc-config-typescript",
     "all": true,
     "include": [
-        "src/**/*.js"
+        "src/**/*.js",
+        "helper/**/*.js"
     ],
     "exclude": [
         "test/**/*.js",

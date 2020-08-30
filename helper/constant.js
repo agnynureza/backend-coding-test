@@ -1,0 +1,4 @@
+module.exports = {
+    VALIDATION_ERROR: 'VALIDATION_ERROR',
+    RIDES_NOT_FOUND: 'RIDES_NOT_FOUND_ERROR',
+};

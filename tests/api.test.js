@@ -1,36 +1,22 @@
 const request = require('supertest');
 
-const sqlite3 = require('sqlite3').verbose();
-
 const expect = require('chai').expect;
 
-const db = new sqlite3.Database(':memory:');
+const db = require('../db/dbQuery');
 
 const mock = require('./api.mock');
 const app = require('../src/app')(db, mock.logger());
-const buildSchemas = require('../src/schemas');
-const helper = require('../src/helper');
+const buildSchemas = require('../src/schemas')();
+const helper = require('../helper/helper');
+const model = require('../src/model');
 
 describe('API tests', () => {
-    before((done) => {
-        db.serialize((err) => {
-            if (err) {
-                return done(err);
-            }
-
-            buildSchemas(db);
-
-            done();
-        });
-    });
-
-    describe('GET /health', () => {
-        it('should return health', (done) => {
-            request(app)
-                .get('/health')
-                .expect('Content-Type', /text/)
-                .expect(200, done);
-        });
+    before(async () => {
+        try {
+            await db.query(buildSchemas, []);
+        } catch (err) {
+            return err;
+        }
     });
 
     describe('GET /rides', () => {
@@ -46,9 +32,18 @@ describe('API tests', () => {
     describe('GET /rides/:id', () => {
         it('should return ride object', (done) => {
             request(app)
-                .get('/rides/1')
+                .get('/rides/abc')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    });
+
+    describe('GET /health', () => {
+        it('should return health', (done) => {
+            request(app)
+                .get('/health')
+                .expect('Content-Type', /text/)
                 .expect(200, done);
         });
     });
@@ -133,6 +128,27 @@ describe('API tests', () => {
                 .expect(400, mock.responErrorDriverVehicle, done);
         });
     });
+
+    describe('GET /rides', () => {
+        it('should return ride object', (done) => {
+            request(app)
+                .get('/rides')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    });
+
+    describe('GET /rides/:id', () => {
+        it('should return ride object', (done) => {
+            request(app)
+                .get('/rides/1')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    });
+
     describe('Test helper pagination', () => {
         it('should return data 1 and 2', (done) => {
             const data = helper.pagination(mock.mockPage, mock.mockLimit, mock.mockGetAllData);
@@ -154,6 +170,37 @@ describe('API tests', () => {
             expect(data.pageCount).to.equal(mock.mockExpectPageCount);
             expect(data.data[0]).to.deep.equal(mock.mockGetAllData[2]);
             done();
+        });
+    });
+
+    describe('Test model query', () => {
+        it('should throw error create rider', async () => {
+            try {
+                await model.createRide(db, 'should be error');
+            } catch (err) {
+                expect(err).to.equal(mock.mockErrorMessage);
+            }
+        });
+        it('should throw error last insert', async () => {
+            try {
+                await model.lastInsert(db, 'should be error');
+            } catch (err) {
+                expect(err).to.equal(mock.mockErrorMessage);
+            }
+        });
+        it('should throw error select rider by id', async () => {
+            try {
+                await model.selectRideByID(db, 'should be error');
+            } catch (err) {
+                expect(err).to.equal(mock.mockErrorMessage);
+            }
+        });
+        it('should throw error select all rider', async () => {
+            try {
+                await model.selectAllRider(db, 'should be error');
+            } catch (err) {
+                expect(err).to.equal(mock.mockErrorMessage);
+            }
         });
     });
 });

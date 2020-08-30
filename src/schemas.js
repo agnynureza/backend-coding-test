@@ -1,4 +1,4 @@
-module.exports = (db) => {
+module.exports = () => {
     const createRideTableSchema = `
         CREATE TABLE Rides
         (
@@ -13,8 +13,5 @@ module.exports = (db) => {
         created DATETIME default CURRENT_TIMESTAMP
         )
     `;
-
-    db.run(createRideTableSchema);
-
-    return db;
+    return createRideTableSchema;
 };

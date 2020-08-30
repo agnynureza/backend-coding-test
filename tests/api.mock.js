@@ -30,6 +30,7 @@ module.exports = {
         error_code: 'VALIDATION_ERROR',
         message: 'Driver vehicle must be a non empty string',
     },
+    mockErrorMessage: 'params is not an array!',
     mockPage: 1,
     mockPageLast: 99,
     mockLimit: 2,
