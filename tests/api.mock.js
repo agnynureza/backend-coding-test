@@ -37,6 +37,8 @@ module.exports = {
     mockExpectPageCount: 2,
     mockExpectPageCountAllData: 1,
     mockExpectTotalData: 4,
+    mockTotalData: 4,
+    mockOffset: 0,
     mockGetAllData: [
         {
             rideID: 1,

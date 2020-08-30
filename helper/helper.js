@@ -1,28 +1,29 @@
 /**
- * Hash Password Method
+ * Logic Pagination
  * @param {integer} page
  * @param {integer} limit
- * @param {array of object} data
+ * @param {integer} total
  * @returns {object} returns object
  */
 
-const pagination = (page, limit, data) => {
+const pagination = (page, limit, total) => {
     // if page and limit doesnt exist
     if (!page) {
         page = 1;
     }
     if (!limit) {
-        limit = data.length;
+        limit = total;
     }
 
-    const pageCount = Math.ceil(data.length / limit);
+    const pageCount = Math.ceil(total / limit);
     if (page > pageCount) {
         page = pageCount;
     }
-    const totalData = data.length;
-    data = data.slice((page * limit) - limit, page * limit);
+    const totalData = total;
+    const offset = (page - 1) * limit;
+
     return {
-        data,
+        offset,
         page,
         limit,
         totalData,

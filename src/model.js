@@ -35,11 +35,21 @@ module.exports = {
             throw err;
         }
     },
-    selectAllRider: async (db, params) => {
+    countAllData: async (db, params) => {
         try {
-            const queryInsert = 'SELECT * FROM Rides';
-            const rows = await db.query(queryInsert, params);
+            const querySelect = 'SELECT count(*) as total FROM rides';
+            const rows = await db.query(querySelect, params);
 
+            return rows.rows[0].total;
+        } catch (err) {
+            !err.message ? err.message = 'Unexpected Server Error' : '';
+            throw err;
+        }
+    },
+    selectPagination: async (db, params) => {
+        try {
+            const querySelect = 'SELECT * FROM Rides LIMIT $1,$2';
+            const rows = await db.query(querySelect, params);
             if (rows.rows.length === 0) {
                 const notFound = {
                     error_code: 'RIDES_NOT_FOUND_ERROR',
@@ -47,7 +57,7 @@ module.exports = {
                 };
                 return notFound;
             }
-            return rows.rows;
+            return rows;
         } catch (err) {
             !err.message ? err.message = 'Unexpected Server Error' : '';
             throw err;

@@ -199,6 +199,10 @@ Please implement load testing to ensure your service can handle a high amount of
     2. Ensure that load testing is able to be run using `npm test:load`. You can consider using a tool like `forever` to spin up a daemon and kill it after the load test has completed.
     3. Test all endpoints under at least `100 rps` for `30s` and ensure that `p99` is under `50ms`
 
+Result Load Test 100rps and duration 30s
+
+![loadtest](images/loadTest.png)
+
 
 
 [Node.js]: <http://nodejs.org>

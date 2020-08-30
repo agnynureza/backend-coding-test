@@ -1,5 +1,11 @@
 const constant = require('./constant');
 
+/**
+ * payload validation
+ * @param {object} obj
+ * @returns {object} returns object error
+ */
+
 module.exports = (obj) => {
     if (obj.startLatitude < -90 || obj.startLatitude > 90 || obj.startLongitude < -180 || obj.startLongitude > 180) {
         const errorObj = {
