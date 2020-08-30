@@ -22,6 +22,10 @@ Below will be your set of tasks to accomplish. Please work on each of these task
 5. [Security](#security)
 6. [Load Testing](#load-testing)
 
+Finish All Task :
+
+![finish](images/pullRequest.png)
+
 ### Documentation
 
 Please deliver documentation of the server that clearly explains the goals of this project and clarifies the API response that is expected.
@@ -128,6 +132,10 @@ All APIs accessed from `localhost:8010`, all data is send and receives as JSON, 
 ![start](images/start.png)
 
 
+#### Coverage
+code coverage with total thresholds 80% 
+
+![coverage](images/coverage.png)
 
 ### Implement Tooling
 
