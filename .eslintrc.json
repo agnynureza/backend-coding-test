@@ -13,11 +13,16 @@
     "rules": {
         "indent":[
             "error",
-            2
+            4
         ],
         "semi": [
             "error",
             "always"
+        ],
+        "max-len": [
+            1,
+            150,
+            200
         ]
     }
 }
