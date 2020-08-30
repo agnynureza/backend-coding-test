@@ -12,7 +12,8 @@
   "scripts": {
     "lint": "eslint . --ext .js",
     "test": "nyc mocha tests && npm run lint",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test:load": "artillery run load-test.yml"
   },
   "pre-push": [
     "test"
@@ -30,11 +31,13 @@
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "artillery": "^1.6.1",
     "chai": "^4.2.0",
     "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "mocha": "^6.1.4",
+    "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
     "pre-push": "^0.1.1",
     "source-map-support": "^0.5.19",

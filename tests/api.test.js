@@ -151,24 +151,22 @@ describe('API tests', () => {
 
     describe('Test helper pagination', () => {
         it('should return data 1 and 2', (done) => {
-            const data = helper.pagination(mock.mockPage, mock.mockLimit, mock.mockGetAllData);
+            const data = helper.pagination(mock.mockPage, mock.mockLimit, mock.mockTotalData);
             expect(data.totalData).to.equal(mock.mockExpectTotalData);
             expect(data.pageCount).to.equal(mock.mockExpectPageCount);
-            expect(data.data[0]).to.deep.equal(mock.mockGetAllData[0]);
+            expect(data.offset).to.equal(mock.mockOffset);
             done();
         });
         it('should return all data', (done) => {
-            const data = helper.pagination(undefined, undefined, mock.mockGetAllData);
+            const data = helper.pagination(undefined, undefined, mock.mockTotalData);
             expect(data.totalData).to.equal(mock.mockExpectTotalData);
             expect(data.pageCount).to.equal(mock.mockExpectPageCountAllData);
-            expect(data.data[0]).to.deep.equal(mock.mockGetAllData[0]);
             done();
         });
         it('should return last page', (done) => {
-            const data = helper.pagination(mock.mockPageLast, mock.mockLimit, mock.mockGetAllData);
+            const data = helper.pagination(mock.mockPageLast, mock.mockLimit, mock.mockTotalData);
             expect(data.totalData).to.equal(mock.mockExpectTotalData);
             expect(data.pageCount).to.equal(mock.mockExpectPageCount);
-            expect(data.data[0]).to.deep.equal(mock.mockGetAllData[2]);
             done();
         });
     });
@@ -195,9 +193,16 @@ describe('API tests', () => {
                 expect(err).to.equal(mock.mockErrorMessage);
             }
         });
-        it('should throw error select all rider', async () => {
+        it('should throw error count all data', async () => {
             try {
-                await model.selectAllRider(db, 'should be error');
+                await model.countAllData(db, 'should be error');
+            } catch (err) {
+                expect(err).to.equal(mock.mockErrorMessage);
+            }
+        });
+        it('should throw error select pagination', async () => {
+            try {
+                await model.selectPagination(db, 'should be error');
             } catch (err) {
                 expect(err).to.equal(mock.mockErrorMessage);
             }

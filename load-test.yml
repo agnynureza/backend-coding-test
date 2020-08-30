@@ -1,0 +1,31 @@
+config:
+    target: "http://localhost:8010"
+    tls:
+        rejectUnauthorized: false
+    phases:
+        - duration: 30
+          arrivalRate: 100
+scenarios:
+    - flow:
+        - post:
+            url: "/rides"
+            json:
+                start_lat: 80
+                start_long: 150
+                end_lat: 82
+                end_long: 150
+                rider_name: "reza"
+                driver_name: "agny"
+                driver_vehicle: "car"
+            capture:
+                json: "$.rideID"
+                as: "id"
+        - get:
+            url: "/rides"
+            qs:
+                page: 1
+                limit: 1
+        - get:
+            url: "/rides/{{ id }}" 
+
+

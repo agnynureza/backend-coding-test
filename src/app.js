@@ -56,11 +56,17 @@ module.exports = (db, logger) => {
             const page = Number(req.query.page);
             const limit = Number(req.query.limit);
 
-            let rows = await model.selectAllRider(db, []);
+            const total = await model.countAllData(db, []);
+            const value = helper.pagination(page, limit, total);
+
+            const rows = await model.selectPagination(db, [value.offset, value.limit]);
             if (rows.error_code === constant.RIDES_NOT_FOUND) {
                 logger.warn(rows.message);
             } else {
-                rows = helper.pagination(page, limit, rows);
+                rows.page = value.page;
+                rows.limit = value.limit;
+                rows.totalData = total;
+                rows.pageCount = value.pageCount;
                 logger.info('Success Retrieve All Data Ride');
             }
 
