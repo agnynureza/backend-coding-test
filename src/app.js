@@ -20,41 +20,41 @@ module.exports = (db, logger) => {
             logger.error('VALIDATION_ERROR');
             return res.send({
                 error_code: 'VALIDATION_ERROR',
-                message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively',
             });
         }
 
         if (endLatitude < -90 || endLatitude > 90 || endLongitude < -180 || endLongitude > 180) {
             return res.send({
                 error_code: 'VALIDATION_ERROR',
-                message: 'End latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                message: 'End latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively',
             });
         }
 
         if (typeof riderName !== 'string' || riderName.length < 1) {
             return res.send({
                 error_code: 'VALIDATION_ERROR',
-                message: 'Rider name must be a non empty string'
+                message: 'Rider name must be a non empty string',
             });
         }
 
         if (typeof driverName !== 'string' || driverName.length < 1) {
             return res.send({
                 error_code: 'VALIDATION_ERROR',
-                message: 'Rider name must be a non empty string'
+                message: 'Rider name must be a non empty string',
             });
         }
 
         if (typeof driverVehicle !== 'string' || driverVehicle.length < 1) {
             return res.send({
                 error_code: 'VALIDATION_ERROR',
-                message: 'Rider name must be a non empty string'
+                message: 'Rider name must be a non empty string',
             });
         }
 
         const values = [startLatitude, startLongitude, endLatitude, endLongitude, riderName, driverName, driverName];
-        const result = db.run(`INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?)`, values, (err) =>{
+        db.run(`INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)`, values, (err) => {
             if (err) {
                 return res.send({
                     error_code: 'SERVER_ERROR',
@@ -62,7 +62,7 @@ module.exports = (db, logger) => {
                 });
             }
 
-            db.all('SELECT * FROM Rides WHERE rideID = ?', this.lastID, (error, rows) => {
+            db.all('SELECT * FROM Rides WHERE rideID = ?', this.lastID, (err, rows) => {
                 if (err) {
                     return res.send({
                         error_code: 'SERVER_ERROR',
@@ -76,7 +76,7 @@ module.exports = (db, logger) => {
     });
 
     app.get('/rides', (req, res) => {
-        db.all('SELECT * FROM Rides', (err, rows) =>{
+        db.all('SELECT * FROM Rides', (err, rows) => {
             if (err) {
                 return res.send({
                     error_code: 'SERVER_ERROR',
@@ -100,14 +100,14 @@ module.exports = (db, logger) => {
             if (err) {
                 return res.send({
                     error_code: 'SERVER_ERROR',
-                    message: 'Unknown error'
+                    message: 'Unknown error',
                 });
             }
 
             if (rows.length === 0) {
                 return res.send({
                     error_code: 'RIDES_NOT_FOUND_ERROR',
-                    message: 'Could not find any rides'
+                    message: 'Could not find any rides',
                 });
             }
 
