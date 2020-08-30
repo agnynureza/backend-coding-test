@@ -9,7 +9,10 @@
         "airbnb-base"
     ],
     "parserOptions": {
-        "ecmaVersion": 6
+        "ecmaVersion": 2018,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
     },
     "rules": {
         "indent":[
@@ -22,6 +25,7 @@
         ],
         "max-len": "off",
         "consistent-return":"off",
-        "no-shadow":"off"
+        "no-shadow":"off",
+        "func-names": "off"
     }
 }

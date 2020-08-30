@@ -2,12 +2,12 @@
     "extends": "@istanbuljs/nyc-config-typescript",
     "all": true,
     "include": [
-        "src/**/*.js",
-        "index.js"
+        "src/**/*.js"
     ],
     "exclude": [
         "test/**/*.js",
-        "node_modules"
+        "node_modules",
+        "index.js"
     ],
     "check-coverage": true,
     "branches": 80,
