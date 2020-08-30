@@ -2,11 +2,14 @@ const request = require('supertest');
 
 const sqlite3 = require('sqlite3').verbose();
 
+const expect = require('chai').expect;
+
 const db = new sqlite3.Database(':memory:');
 
 const mock = require('./api.mock');
 const app = require('../src/app')(db, mock.logger());
 const buildSchemas = require('../src/schemas');
+const helper = require('../src/helper');
 
 describe('API tests', () => {
     before((done) => {
@@ -128,6 +131,29 @@ describe('API tests', () => {
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(400, mock.responErrorDriverVehicle, done);
+        });
+    });
+    describe('Test helper pagination', () => {
+        it('should return data 1 and 2', (done) => {
+            const data = helper.pagination(mock.mockPage, mock.mockLimit, mock.mockGetAllData);
+            expect(data.totalData).to.equal(mock.mockExpectTotalData);
+            expect(data.pageCount).to.equal(mock.mockExpectPageCount);
+            expect(data.data[0]).to.deep.equal(mock.mockGetAllData[0]);
+            done();
+        });
+        it('should return all data', (done) => {
+            const data = helper.pagination(undefined, undefined, mock.mockGetAllData);
+            expect(data.totalData).to.equal(mock.mockExpectTotalData);
+            expect(data.pageCount).to.equal(mock.mockExpectPageCountAllData);
+            expect(data.data[0]).to.deep.equal(mock.mockGetAllData[0]);
+            done();
+        });
+        it('should return last page', (done) => {
+            const data = helper.pagination(mock.mockPageLast, mock.mockLimit, mock.mockGetAllData);
+            expect(data.totalData).to.equal(mock.mockExpectTotalData);
+            expect(data.pageCount).to.equal(mock.mockExpectPageCount);
+            expect(data.data[0]).to.deep.equal(mock.mockGetAllData[2]);
+            done();
         });
     });
 });

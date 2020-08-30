@@ -68,11 +68,25 @@ All APIs accessed from `localhost:8010`, all data is send and receives as JSON, 
     
     ![badrequest](images/badRequest.png)
 
-2. Retrieve all rides using `GET /rides` Api 
-
+2. Retrieve all rides using `GET /rides` Api
     Status code : 200
     
-    ![getAll](images/getAll.png)
+    ![getAll](images/pageAll.png)
+
+    optional with pagination, you can sent Params:
+    
+    ```
+        "page": 2,
+        "limit": 2 
+    ```
+    Status Code : 200
+
+    ![pageLimit](images/pageLimit2.png)
+
+    We have 8 total data, limit will divide the total evently, so we get total page 4.
+    Because we request page 2 , so it will retrieve data id 3 and 4 (assume we have sequentially id from 1) 
+
+    if you not send page or limit, we retrieve all data. 
 
 3. Retrieve a single Ride by id using `GET /rides/:id` Api
 

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const jsonParser = bodyParser.json();
+const helper = require('./helper');
 
 module.exports = (db, logger) => {
     app.get('/health', (req, res) => res.send('Healthy'));
@@ -80,6 +81,8 @@ module.exports = (db, logger) => {
     });
 
     app.get('/rides', (req, res) => {
+        const page = Number(req.query.page);
+        const limit = Number(req.query.limit);
         db.all('SELECT * FROM Rides', (err, rows) => {
             if (err) {
                 logger.error('Server error : ', err);
@@ -96,6 +99,7 @@ module.exports = (db, logger) => {
                     message: 'Could not find any rides',
                 });
             }
+            rows = helper.pagination(page, limit, rows);
             logger.info('Success Retrieve All Data Ride');
             return res.send(rows);
         });
