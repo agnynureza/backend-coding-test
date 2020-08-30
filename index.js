@@ -18,7 +18,7 @@ const route = require('./src/app');
 const logConfiguration = {
     transports: [
         new winston.transports.File({
-            filename: './logs/example-1.log',
+            filename: './logs/dev-log.log',
         }),
         new winston.transports.Console({
             level: 'verbose',
